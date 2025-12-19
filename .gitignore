@@ -11,9 +11,8 @@ data/raw/
 # Data exports (runtime only)
 data/exports/
 
-# Local documentation and experiments
+# Local documentation
 docs/
-tests/
 
 # Backup copies
 * Copy.py
