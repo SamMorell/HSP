@@ -19,6 +19,9 @@ tests/
 * Copy.py
 * BAK.py
 
+# Archived Python Script Versions
+archived/
+
 # Miscellaneous
 .DS_Store
 .env
