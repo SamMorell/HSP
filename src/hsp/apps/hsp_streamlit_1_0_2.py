@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import List, Optional, Tuple
+from datetime import datetime
 
 import pandas as pd
 import streamlit as st
@@ -40,6 +41,10 @@ def _find_first_existing(paths: List[Path]) -> Optional[Path]:
             return p
     return None
 
+def get_script_timestamp() -> str:
+    script_path = Path(__file__)
+    ts = script_path.stat().st_mtime
+    return datetime.fromtimestamp(ts).strftime("%Y-%m-%d %H:%M")
 
 def _candidate_locations(filename: str) -> List[Path]:
     """Search locations relative to the repo root (pyproject.toml)."""
@@ -321,10 +326,14 @@ def main():
         unsafe_allow_html=True,
     )
 
-    # --- Title ---
+    # --- Title + Version ---
     st.markdown('<div class="hsp-title">Hansen Solubility Parameters</div>', unsafe_allow_html=True)
-    st.caption(f"v{APP_VERSION}")
-    st.caption("RUNNING: hsp_streamlit_1.0.2 (via shim)")
+    
+    
+    st.caption(f"{APP_VERSION} ({get_script_timestamp()})")
+    
+    # st.caption(f"v{APP_VERSION}")
+    # st.caption("RUNNING: hsp_streamlit_1.0.2 (via shim)")
 
     # ===== Target Materials =====
     st.markdown('<div class="hsp-section">Target Materials</div>', unsafe_allow_html=True)
