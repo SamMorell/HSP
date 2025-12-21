@@ -8,8 +8,9 @@ __pycache__/
 # Data inputs (local only)
 data/raw/
 
-# Data exports (runtime only)
-data/exports/
+# Data
+data/downloads
+data/raw
 
 # Local documentation
 docs/

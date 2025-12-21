@@ -1,0 +1,87 @@
+﻿,rank,target_name,name,dD,dP,dH,delta_d,delta_p,delta_h,distance,compatibility
+0,1,Hydrocarbon Resin,"N,N-Dimethyl Acetamide",16.8,11.5,10.2,0.2,1.7,0.8,1.92,Excellent
+1,2,Hydrocarbon Resin,Diacetone Alcohol,15.8,8.2,10.8,1.2,1.6,1.4,3.21,Excellent
+2,3,Hydrocarbon Resin,Methylene Chloride,17,7.3,7.1,0,2.5,2.3,3.4,Excellent
+3,4,Hydrocarbon Resin,Diethylene Glycol Monobutyl Ether,16,7,10.6,1,2.8,1.2,3.64,Excellent
+4,5,Hydrocarbon Resin,"1,3-Dioxolane",18.1,6.6,9.3,1.1,3.2,0.1,3.88,Excellent
+5,6,Hydrocarbon Resin,N-Methyl-2-Pyrrolidone (NMP),18,12.3,7.2,1,2.5,2.2,3.88,Excellent
+6,7,Hydrocarbon Resin,Acetone,15.5,10.4,7,1.5,0.6,2.4,3.89,Excellent
+7,8,Hydrocarbon Resin,Methyl Carbitol,16.2,7.8,12.6,0.8,2,3.2,4.1,Excellent
+8,9,Hydrocarbon Resin,Tetrahydrofurfuryl Alcohol,17.8,8.2,12.9,0.8,1.6,3.5,4.17,Excellent
+9,10,Hydrocarbon Resin,Dipropylene Glycol Mono n-Butyl Ether,15.7,6.5,10,1.3,3.3,0.6,4.24,Excellent
+10,11,Hydrocarbon Resin,Ethyl Lactate,16,7.6,12.5,1,2.2,3.1,4.3,Excellent
+11,12,Hydrocarbon Resin,Tetrahydrofuran (THF),16.8,5.7,8,0.2,4.1,1.4,4.35,Excellent
+12,13,Hydrocarbon Resin,Methyl Acetate,15.5,7.2,7.6,1.5,2.6,1.8,4.36,Excellent
+13,14,Hydrocarbon Resin,"N,N-Dimethyl Formamide (DMF)",17.4,13.7,11.3,0.4,3.9,1.9,4.41,Excellent
+14,15,Hydrocarbon Resin,1-Nitropropane,16.6,12.3,5.5,0.4,2.5,3.9,4.7,Excellent
+15,16,Hydrocarbon Resin,Isophorone,17,8,5,0,1.8,4.4,4.75,Excellent
+16,17,Hydrocarbon Resin,Propylene Glycol Monoethyl Ether Acetate,15.6,6.3,7.7,1.4,3.5,1.7,4.79,Excellent
+17,18,Hydrocarbon Resin,Cyclohexanone,17.8,8.4,5.1,0.8,1.4,4.3,4.8,Excellent
+18,19,Hydrocarbon Resin,Methyl Ethyl Ketone (MEK),16,9,5.1,1,0.8,4.3,4.81,Excellent
+19,20,Hydrocarbon Resin,Butyl Glycol Acetate,15.3,7.5,6.8,1.7,2.3,2.6,4.86,Excellent
+20,21,Hydrocarbon Resin,Propylene Glycol Monomethyl Ether,15.6,6.3,11.6,1.4,3.5,2.2,4.99,Excellent
+21,22,Hydrocarbon Resin,Propylene Glycol Phenyl Ether,17.4,5.3,11.5,0.4,4.5,2.1,5.03,Good
+22,23,Hydrocarbon Resin,Propylene Glycol Monomethyl Ether Acetate,15.6,5.6,9.8,1.4,4.2,0.4,5.06,Good
+23,24,Hydrocarbon Resin,Dipropylene Glycol Methyl Ether,15.5,5.7,11.2,1.5,4.1,1.8,5.39,Good
+24,25,Hydrocarbon Resin,Ethyl Acetate,15.8,5.3,7.2,1.2,4.5,2.2,5.55,Good
+25,26,Hydrocarbon Resin,Methyl Propyl Ketone,16,7.6,4.7,1,2.2,4.7,5.56,Good
+26,27,Hydrocarbon Resin,Ethylene Glycol Monobutyl Ether,16,5.1,12.3,1,4.7,2.9,5.87,Good
+27,28,Hydrocarbon Resin,n-Butyl Propionate,15.7,5.5,5.9,1.3,4.3,3.5,6.12,Good
+28,29,Hydrocarbon Resin,Ethylene Glycol Monomethyl Ether,16,8.2,15,1,1.6,5.6,6.16,Good
+29,30,Hydrocarbon Resin,Butyl Diglycol Acetate,16,4.1,8.2,1,5.7,1.2,6.16,Good
+30,31,Hydrocarbon Resin,Methyl Cellosolve,16,8.2,15,1,1.6,5.6,6.16,Good
+31,32,Hydrocarbon Resin,m-Cresol,18.5,6.5,13.7,1.5,3.3,4.3,6.2,Good
+32,33,Hydrocarbon Resin,Benzyl Alcohol,18.4,6.3,13.7,1.4,3.5,4.3,6.21,Good
+33,34,Hydrocarbon Resin,Butyl Benzoate,18.3,5.6,5.5,1.3,4.2,3.9,6.29,Good
+34,35,Hydrocarbon Resin,Propylene Glycol Monobutyl Ether,15.3,4.5,9.2,1.7,5.3,0.2,6.3,Good
+35,36,Hydrocarbon Resin,n-Propyl Propanoate,15.5,5.6,5.7,1.5,4.2,3.7,6.35,Good
+36,37,Hydrocarbon Resin,n-Amyl Alcohol,15.9,5.9,13.9,1.1,3.9,4.5,6.35,Good
+37,38,Hydrocarbon Resin,iso-Pentyl Alcohol,15.8,5.2,13.3,1.2,4.6,3.9,6.49,Good
+38,39,Hydrocarbon Resin,2-Phenoxy Ethanol,17.8,5.7,14.3,0.8,4.1,4.9,6.59,Good
+39,40,Hydrocarbon Resin,n-Propyl Acetate,15.3,4.3,7.6,1.7,5.5,1.8,6.71,Good
+40,41,Hydrocarbon Resin,Iso-Propyl Acetate,14.9,4.5,8.2,2.1,5.3,1.2,6.87,Good
+41,42,Hydrocarbon Resin,2-Butanol,15.8,5.7,14.5,1.2,4.1,5.1,6.97,Good
+42,43,Hydrocarbon Resin,Methyl iso-Amyl Ketone,16,5.7,4.1,1,4.1,5.3,6.99,Good
+43,44,Hydrocarbon Resin,Cyclohexanol,17.4,4.1,13.5,0.4,5.7,4.1,7.07,Good
+44,45,Hydrocarbon Resin,Dimethyl Sulfoxide (DMSO),18.4,16.4,10.2,1.4,6.6,0.8,7.21,Good
+45,46,Hydrocarbon Resin,n-Butyl Acetate,15.8,3.7,6.3,1.2,6.1,3.1,7.25,Good
+46,47,Hydrocarbon Resin,Methyl Iso-Butyl Ketone (MIBK),15.3,6.1,4.1,1.7,3.7,5.3,7.3,Good
+47,48,Hydrocarbon Resin,gamma-Butyrolactone (GBL),18,16.6,7.4,1,6.8,2,7.36,Good
+48,49,Hydrocarbon Resin,sec-Butyl Acetate,15,3.7,7.6,2,6.1,1.8,7.51,Good
+49,50,Hydrocarbon Resin,n-Amyl Acetate,15.8,3.3,6.1,1.2,6.5,3.3,7.67,Good
+50,51,Hydrocarbon Resin,Caprolactone (Epsilon),19.7,15,7.4,2.7,5.2,2,7.76,Good
+51,52,Hydrocarbon Resin,Methyl iso-Butyl Carbinol,15.4,3.3,12.3,1.6,6.5,2.9,7.8,Good
+52,53,Hydrocarbon Resin,Chloroform,17.8,3.1,5.7,0.8,6.7,3.7,7.82,Good
+53,54,Hydrocarbon Resin,1-Butanol,16,5.7,15.8,1,4.1,6.4,7.86,Good
+54,55,Hydrocarbon Resin,Iso-Pentyl Acetate,15.3,3.1,7,1.7,6.7,2.4,7.89,Good
+55,56,Hydrocarbon Resin,Methyl Oleate,16.2,3.8,4.5,0.8,6,4.9,7.91,Good
+56,57,Hydrocarbon Resin,t-Butyl Alcohol,15.2,5.1,14.7,1.8,4.7,5.3,7.95,Good
+57,58,Hydrocarbon Resin,t-Butyl Acetate,15,3.7,6,2,6.1,3.4,8.05,Good
+58,59,Hydrocarbon Resin,"1,4-Dioxane",17.5,1.8,9,0.5,8,0.4,8.07,Good
+59,60,Hydrocarbon Resin,2-Propanol,15.8,6.1,16.4,1.2,3.7,7,8.27,Good
+60,61,Hydrocarbon Resin,Di-isoButyl Ketone,16,3.7,4.1,1,6.1,5.3,8.32,Good
+61,62,Hydrocarbon Resin,Dipropylene Glycol,16.5,10.6,17.7,0.5,0.8,8.3,8.4,Good
+62,63,Hydrocarbon Resin,Sulfolane (Tetramethylene Sulfone),18,18,9.9,1,8.2,0.5,8.46,Good
+63,64,Hydrocarbon Resin,Iso-Butanol,15.1,5.7,15.9,1.9,4.1,6.5,8.57,Good
+64,65,Hydrocarbon Resin,Benzyl Benzoate,20,5.1,5.2,3,4.7,4.2,8.7,Good
+65,66,Hydrocarbon Resin,Iso-Butyl Isobutyrate,15.1,2.8,5.8,1.9,7,3.6,8.74,Good
+66,67,Hydrocarbon Resin,1-Propanol,16,6.8,17.4,1,3,8,8.77,Good
+67,68,Hydrocarbon Resin,Acetonitrile,15.3,18,6.1,1.7,8.2,3.3,9.47,Good
+68,69,Hydrocarbon Resin,d-Limonene,17.2,1.8,4.3,0.2,8,5.1,9.5,Good
+69,70,Hydrocarbon Resin,Diethyl Ether,14.5,2.9,4.6,2.5,6.9,4.8,9.78,Good
+70,71,Hydrocarbon Resin,Iso-Propyl Ether,15.1,3.2,3.2,1.9,6.6,6.2,9.82,Good
+71,72,Hydrocarbon Resin,Ethanol,15.8,8.8,19.4,1.2,1,10,10.33,Poor
+72,73,Hydrocarbon Resin,Xylene,17.6,1,3.1,0.6,8.8,6.3,10.89,Poor
+73,74,Hydrocarbon Resin,Toluene,18,1.4,2,1,8.4,7.4,11.37,Poor
+74,75,Hydrocarbon Resin,Propylene Carbonate,20,18,4.1,3,8.2,5.3,11.46,Poor
+75,76,Hydrocarbon Resin,Ethyl Benzene,17.8,0.6,1.4,0.8,9.2,8,12.3,Poor
+76,77,Hydrocarbon Resin,Benzene,18.4,0,2,1.4,9.8,7.4,12.6,Poor
+77,78,Hydrocarbon Resin,Ethylene Carbonate,18,21.7,5.1,1,11.9,4.3,12.81,Poor
+78,79,Hydrocarbon Resin,Dimethyl Cyclohexane,16.1,0,1.1,0.9,9.8,8.3,12.97,Poor
+79,80,Hydrocarbon Resin,Methyl Cyclohexane,16,0,1,1,9.8,8.4,13.06,Poor
+80,81,Hydrocarbon Resin,Cyclohexane,16.8,0,0.2,0.2,9.8,9.2,13.45,Poor
+81,82,Hydrocarbon Resin,Methanol,14.7,12.3,22.3,2.3,2.5,12.9,13.92,Poor
+82,83,Hydrocarbon Resin,Heptane,15.3,0,0,1.7,9.8,9.4,14,Poor
+83,84,Hydrocarbon Resin,Hexane,14.9,0,0,2.1,9.8,9.4,14.21,Poor
+84,85,Hydrocarbon Resin,Ethylene Glycol,17,11,26,0,1.2,16.6,16.64,Poor
+85,86,Hydrocarbon Resin,Glycerol Carbonate,17.9,25.5,17.4,0.9,15.7,8,17.71,Poor
