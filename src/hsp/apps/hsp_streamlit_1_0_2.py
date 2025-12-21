@@ -24,8 +24,7 @@ TARGET_MATERIALS_XLSX = "Materials.xlsx"
 TARGET_MATERIAL_TYPES_XLSX = "Material_Types.xlsx"
 TARGET_SUPPLIERS_XLSX = "Suppliers.xlsx"
 
-DEFAULT_CANDIDATE_XLSX = "Default_Materials.xlsx"
-
+DEFAULT_CANDIDATE_XLSX = "default_dataset.xlsx"
 
 def find_repo_root(start: Path) -> Path:
     """Walk upward until we find pyproject.toml (repo root)."""
@@ -54,6 +53,7 @@ def _candidate_locations(filename: str) -> List[Path]:
     return [
         repo_root / filename,
         repo_root / "data" / filename,
+        repo_root / "data" / "defaults" / filename,
         repo_root / "data" / TARGET_DIRNAME / filename,
         repo_root / "data" / CANDIDATES_DIRNAME / filename,
     ]
