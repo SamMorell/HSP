@@ -488,7 +488,7 @@ def main():
     st.dataframe(pretty_headers_df(materials_df), use_container_width=True)
 
     
-    if st.button("Calculate Solubility"):
+    if st.button("Calculate Similarity"):
         results_df = calculate_hsp_distances(materials_df, target=target, round_to=2)
         #st.dataframe(results_df, use_container_width=True)
         results_display = pretty_headers_df(results_df)
@@ -497,9 +497,9 @@ def main():
 
         xlsx_bytes = export_results_excel(results_df, sheet_name="HSP Results")
         st.download_button(
-            "Download Results (XLSX)",
+            "Download Similarity Results (XLSX)",
             data=xlsx_bytes,
-            file_name="hsp_results.xlsx",
+            file_name="Similarity Results.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         )
 

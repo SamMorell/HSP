@@ -27,6 +27,7 @@ from typing import Dict, Union, Any
 
 import numpy as np
 import pandas as pd
+from openpyxl.styles import Alignment
 
 
 REQUIRED_COLS = ["name", "dD", "dP", "dH"]
@@ -151,11 +152,29 @@ def calculate_hsp_distances(df: 'pd.DataFrame', target=None, round_to: int = 2, 
 
     return out
 
+KEEP_HEADER_CASE = {"dD", "dP", "dH"}
+
+
+def _pretty_header(name: str) -> str:
+    """Format a column header for export/UI: underscores -> spaces, Title Case; keep dD/dP/dH as-is."""
+    if name in KEEP_HEADER_CASE:
+        return name
+    return str(name).replace("_", " ").strip().title()
 
 
 def export_results_excel(df: pd.DataFrame, sheet_name: str = "Results") -> bytes:
-    """Export results DataFrame to XLSX bytes (Streamlit download_button friendly)."""
+    """Export results DataFrame to XLSX bytes with formatted, left-aligned headers."""
+    # Make a copy so we don't mutate callers
+    out_df = df.copy()
+    out_df.columns = [_pretty_header(c) for c in out_df.columns]
+
     output = io.BytesIO()
     with pd.ExcelWriter(output, engine="openpyxl") as writer:
-        df.to_excel(writer, index=False, sheet_name=sheet_name)
+        out_df.to_excel(writer, index=False, sheet_name=sheet_name)
+
+        # Left-align header row (row 1)
+        ws = writer.book[sheet_name]
+        for cell in ws[1]:
+            cell.alignment = Alignment(horizontal="left", vertical="center")
+
     return output.getvalue()
