@@ -497,9 +497,9 @@ def main():
 
         xlsx_bytes = export_results_excel(results_df, sheet_name="HSP Results")
         st.download_button(
-            "Download Similarity Results (XLSX)",
+            "Download HSP Similarity Results (XLSX)",
             data=xlsx_bytes,
-            file_name="Similarity Results.xlsx",
+            file_name="HSP Similarity Results.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         )
 
