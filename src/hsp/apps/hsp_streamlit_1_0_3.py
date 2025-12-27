@@ -13,7 +13,7 @@ from hsp.core.hsp_core import (
     export_results_excel,
 )
 
-APP_VERSION = "1.0.2"
+APP_VERSION = "1.0.3"
 
 # --- Your preferred names ---
 TARGET_DIRNAME = "target_materials"
@@ -25,6 +25,21 @@ TARGET_MATERIAL_TYPES_XLSX = "Material_Types.xlsx"
 TARGET_SUPPLIERS_XLSX = "Suppliers.xlsx"
 
 DEFAULT_CANDIDATE_XLSX = "default_dataset.xlsx"
+
+#----- Helpers -----------------
+KEEP_CASE = {"dD", "dP", "dH"}
+
+def pretty_col(col: str) -> str:
+    if col in KEEP_CASE:
+        return col
+    # replace underscores and title case
+    return str(col).replace("_", " ").strip().title()
+
+def pretty_headers_df(df: pd.DataFrame) -> pd.DataFrame:
+    df2 = df.copy()
+    df2.columns = [pretty_col(c) for c in df2.columns]
+    return df2
+#--------------------------------
 
 def find_repo_root(start: Path) -> Path:
     """Walk upward until we find pyproject.toml (repo root)."""
@@ -296,9 +311,9 @@ def main():
 
     # --- Header GIF (safe: only try if file exists) ---
     repo_root = find_repo_root(Path(__file__).resolve().parent)
-    gif_path = repo_root / "assets" / "sammorell.com_animated_header.gif"
+    gif_path = repo_root / "assets" / "sammorell.com_animated_header_no_loop.gif"
     if gif_path.exists():
-        st.image(str(gif_path), width=400)
+        st.image(str(gif_path), width=360)
 
     # --- CSS (your styles) ---
     st.markdown(
@@ -309,20 +324,32 @@ def main():
             font-family: 'Segoe UI', Arial, sans-serif;
             font-size: 2.2rem;
             font-weight: 600;
-            margin-bottom: 0.2em;
+            margin-bottom: 0.15em;
+            line-height: 1.1;
         }
         .hsp-section {
             color: #FFA500;
             font-family: 'Segoe UI', Arial, sans-serif;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 600;
-            margin-top: 1.5em;
-            margin-bottom: 0.5em;
-            border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 0.2em;
+            margin-top: .1em;
+            margin-bottom: 0.1em;
+            padding-bottom: 0.1em;
+            border-top: 2px solid rgb(255, 165, 0);
+
+            /* tighten spacing right after a section header */
+            margin-bottom: 0.0rem !important; padding-bottom: 0.0rem !important;
         }
+
+        /* radio block tends to add top padding; pull it up a bit */
+        div[data-testid="stRadio"] { margin-top: -30px !important; }
+
+        /* also reduce spacing Streamlit inserts between blocks */
+        #div.block-container { padding-top: 1.4rem; }
+
         </style>
         """,
+
         unsafe_allow_html=True,
     )
 
@@ -341,7 +368,7 @@ def main():
     _ensure_target_state()
     catalog = load_target_catalog()
 
-    target_mode = st.radio("Target input mode", ["Pick from library", "Manual entry"], horizontal=True)
+    target_mode = st.radio("", ["Pick from library", "Manual entry"], horizontal=True)
 
     if target_mode == "Pick from library":
         missing_msgs: List[str] = []
@@ -419,7 +446,7 @@ def main():
     # Always-show editable manual inputs
     c1, c2, c3, c4 = st.columns([2, 1, 1, 1])
     with c1:
-        target_name = st.text_input("Material Name", key="target_name")
+        target_name = st.text_input("Name", key="target_name")
     with c2:
         target_dD = st.number_input("δD – Dispersion", key="target_dD", step=0.1, format="%.2f")
     with c3:
@@ -432,15 +459,15 @@ def main():
     # ===== Candidate Materials =====
     st.markdown('<div class="hsp-section">Candidate Materials</div>', unsafe_allow_html=True)
 
-    uploaded_file = st.file_uploader("Upload candidates Excel (.xlsx/.xls)", type=["xlsx", "xls"])
-
     default_df = load_default_candidates()
     use_default = False
     if default_df is not None:
-        use_default = st.toggle(f"Use bundled default dataset ({DEFAULT_CANDIDATE_XLSX})", value=False)
+        use_default = st.toggle(f"Use {DEFAULT_CANDIDATE_XLSX}", value=False)
+
+    uploaded_file = st.file_uploader("Or, upload candidate materials (.xlsx/.xls)", type=["xlsx", "xls"])
 
     # ===== Results =====
-    st.markdown('<div class="hsp-section">Results</div>', unsafe_allow_html=True)
+    #st.markdown('<div class="hsp-section">Results</div>', unsafe_allow_html=True)
 
     materials_df = None
     if uploaded_file is not None:
@@ -448,20 +475,25 @@ def main():
         uploaded_df = _safe_normalize(uploaded_df)
         uploaded_df = _safe_clean(uploaded_df)
         materials_df = uploaded_df
-        st.success(f"Loaded uploaded candidates: {len(materials_df)} rows")
+        st.success(f"Using uploaded candidates: {len(materials_df)} rows")
 
     elif use_default and default_df is not None:
         materials_df = default_df
-        st.info(f"Using bundled candidates: {len(materials_df)} rows")
+        st.info(f"Using default_dataset.xlsx: {len(materials_df)} rows")
     else:
-        st.info("Upload a candidates file (or enable the bundled default dataset) to proceed.")
+        #st.info("Upload a candidates file or use default_dataset.xlsx")
         st.stop()
 
-    st.dataframe(materials_df, use_container_width=True)
+    #st.dataframe(materials_df, use_container_width=True)
+    st.dataframe(pretty_headers_df(materials_df), use_container_width=True)
 
+    
     if st.button("Calculate Solubility"):
         results_df = calculate_hsp_distances(materials_df, target=target, round_to=2)
-        st.dataframe(results_df, use_container_width=True)
+        #st.dataframe(results_df, use_container_width=True)
+        results_display = pretty_headers_df(results_df)
+        st.dataframe(results_display, use_container_width=True)
+
 
         xlsx_bytes = export_results_excel(results_df, sheet_name="HSP Results")
         st.download_button(
@@ -471,6 +503,6 @@ def main():
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         )
 
-
+        
 if __name__ == "__main__":
     main()
