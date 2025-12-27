@@ -464,7 +464,7 @@ def main():
     if default_df is not None:
         use_default = st.toggle(f"Use {DEFAULT_CANDIDATE_XLSX}", value=False)
 
-    uploaded_file = st.file_uploader("Or, upload candidate materials (.xlsx/.xls)", type=["xlsx", "xls"])
+    uploaded_file = st.file_uploader("Or, upload (drag/drop) candidate materials (.xlsx/.xls)", type=["xlsx", "xls"])
 
     # ===== Results =====
     #st.markdown('<div class="hsp-section">Results</div>', unsafe_allow_html=True)
@@ -484,17 +484,26 @@ def main():
         #st.info("Upload a candidates file or use default_dataset.xlsx")
         st.stop()
 
-    #st.dataframe(materials_df, use_container_width=True)
-    st.dataframe(pretty_headers_df(materials_df), use_container_width=True)
-
+    
+    # ---- Candidates table ----
+    display_df = materials_df.rename(columns={"name": "material"})
+    st.dataframe(pretty_headers_df(display_df), use_container_width=True)
+    
     
     if st.button("Calculate Similarity"):
         results_df = calculate_hsp_distances(materials_df, target=target, round_to=2)
-        #st.dataframe(results_df, use_container_width=True)
+        
+        # ---- Results table ----
+        results_df = results_df.rename(
+            columns={
+                "target_name": "Target Material",
+                "name": "Candidate Material",
+            }
+        )
         results_display = pretty_headers_df(results_df)
         st.dataframe(results_display, use_container_width=True)
 
-
+        
         xlsx_bytes = export_results_excel(results_df, sheet_name="HSP Results")
         st.download_button(
             "Download HSP Similarity Results (XLSX)",
