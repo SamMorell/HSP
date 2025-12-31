@@ -13,7 +13,7 @@ from hsp.core.hsp_core import (
     export_results_excel,
 )
 
-APP_VERSION = "1.0.3"
+APP_VERSION = "1.0.4"
 
 # --- Your preferred names ---
 TARGET_DIRNAME = "target_materials"
@@ -39,7 +39,149 @@ def pretty_headers_df(df: pd.DataFrame) -> pd.DataFrame:
     df2 = df.copy()
     df2.columns = [pretty_col(c) for c in df2.columns]
     return df2
-#--------------------------------
+
+
+
+
+
+
+def plot_hsp_3d_streamlit(candidate_df: pd.DataFrame, results_df: pd.DataFrame, target: dict) -> None:
+    """
+    Streamlit-safe 3D Hansen Solubility Parameter plot for target + candidate materials.
+    Target is plotted in black.
+    Candidates with distance <= 8 are blue, > 8 are red.
+
+    Notes:
+    - `candidate_df` is expected to have columns: name, dD, dP, dH
+    - `results_df` may be the raw output of calculate_hsp_distances (with 'name')
+      OR the display-renamed version (with 'Candidate Material'). This function
+      handles both without changing the rest of your app.
+    """
+    import matplotlib.pyplot as plt
+    from mpl_toolkits.mplot3d import Axes3D  # noqa: F401
+
+    # --- Determine column names in results_df robustly ---
+    # Candidate name column
+    if "name" in results_df.columns:
+        name_col = "name"
+    elif "Candidate Material" in results_df.columns:
+        name_col = "Candidate Material"
+    else:
+        # fall back to case-insensitive match
+        lc_map = {c.lower().strip(): c for c in results_df.columns}
+        name_col = lc_map.get("candidate material") or lc_map.get("candidate") or lc_map.get("name")
+        if not name_col:
+            st.warning(f"Could not find candidate name column in results_df. Columns: {list(results_df.columns)}")
+            return
+
+    # Distance column
+    if "distance" in results_df.columns:
+        dist_col = "distance"
+    elif "Distance" in results_df.columns:
+        dist_col = "Distance"
+    else:
+        lc_map = {c.lower().strip(): c for c in results_df.columns}
+        dist_col = lc_map.get("distance")
+        if not dist_col:
+            st.warning(f"Could not find distance column in results_df. Columns: {list(results_df.columns)}")
+            return
+
+    # Build a normalized merge frame
+    merge_df = results_df[[name_col, dist_col]].copy()
+    merge_df = merge_df.rename(columns={name_col: "name", dist_col: "distance"})
+
+    # Merge distances onto candidate dataframe
+    plot_df = candidate_df.merge(merge_df, on="name", how="left").dropna(subset=["dD", "dP", "dH"])
+
+    if plot_df.empty:
+        st.info("No valid HSP data available for 3D plot.")
+        return
+
+    # Plot ----------------------------------------------------------------------------------------
+    fig = plt.figure(figsize=(9.0, 9.0), dpi=600)
+    ax = fig.add_subplot(111, projection="3d")
+    
+
+    # Candidates Distance: Green Vectors <= 3, Blue Vectors if <=10 and >3, Red Vectors if >10
+    best = plot_df["distance"] <= 3
+    good = (plot_df["distance"] <= 10) & (plot_df["distance"] > 3)
+    poor = plot_df["distance"] > 10
+
+    ax.scatter(plot_df.loc[best, "dP"], plot_df.loc[best, "dH"], plot_df.loc[best, "dD"], s=6, c="green", alpha=1.0)
+    ax.scatter(plot_df.loc[good, "dP"], plot_df.loc[good, "dH"], plot_df.loc[good, "dD"], s=6, c="blue", alpha=1.0)
+    ax.scatter(plot_df.loc[poor, "dP"], plot_df.loc[poor, "dH"], plot_df.loc[poor, "dD"], s=6, c="red", alpha=1.0)
+
+
+    # Target: Black Vector and Label
+    #ax.scatter(target["dP"], target["dH"], target["dD"], s=40, c="black", alpha=1.0)
+    #ax.text(target["dP"], target["dH"], target["dD"], target["name"], fontsize=8.0, fontweight="bold", color="black")
+
+    # Target: Black Vector and Label (offset)
+    dx, dy, dz = -1.0, -1.0, -0.25  # adjust as needed
+
+    ax.scatter(
+        target["dP"],
+        target["dH"],
+        target["dD"],
+        s=40,
+        c="black",
+        alpha=1.0,
+    )
+
+    ax.text(
+        target["dP"] + dx,
+        target["dH"] + dy,
+        target["dD"] + dz,
+        target["name"],
+        fontsize=8.0,
+        fontweight="bold",
+        color="black",
+    )
+
+
+    # Vector Labels
+    dx, dy, dz = 0.1, 0.1, 0.1
+
+    for _, row in plot_df.iterrows():
+        ax.text(
+            row["dP"] + dx,
+            row["dH"] + dy,
+            row["dD"] + dz,
+            row["name"],
+            fontsize=5.0,
+            fontweight="normal",
+        )
+
+    """for _, row in plot_df.iterrows():
+        ax.text(float(row["dP"]), float(row["dH"]), float(row["dD"]), str(row["name"]), fontsize=5.0, alpha=1.0)
+
+    ax.text(
+    row["dP"] + 0.2,
+    row["dH"] + 0.08,
+    row["dD"] + 0.08,
+    row["name"],
+    fontsize=3,
+    fontweight="bold",
+)"""
+    
+    # Axis Labels
+    ax.set_xlabel("δP", fontsize=6, fontweight="bold")
+    ax.set_ylabel("δH", fontsize=6, fontweight="bold")
+    ax.set_zlabel("δD", fontsize=6, fontweight="bold", labelpad=10)
+
+    # Tick Labels
+    ax.tick_params(axis="x", labelsize=3.0, pad=0)
+    ax.tick_params(axis="y", labelsize=3.0, pad=0)
+    ax.tick_params(axis="z", labelsize=3.0, pad=0)
+
+    #Chart Perspective
+    ax.view_init(elev=20, azim=-70)
+    fig.subplots_adjust(left=0.02, right=0.95, bottom=0.02, top=0.90)
+
+    st.pyplot(fig, use_container_width=False)
+    plt.close(fig)
+    # --------------------------------------------------------------------------------------
+
 
 def find_repo_root(start: Path) -> Path:
     """Walk upward until we find pyproject.toml (repo root)."""
@@ -503,7 +645,11 @@ def main():
         results_display = pretty_headers_df(results_df)
         st.dataframe(results_display, use_container_width=True)
 
-        
+        # ---- 3D HSP Plot ----
+        st.markdown("### 3D Hansen Solubility Parameter Map")
+        plot_hsp_3d_streamlit(materials_df, results_df, target)
+
+
         xlsx_bytes = export_results_excel(results_df, sheet_name="HSP Results")
         st.download_button(
             "Download HSP Similarity Results (XLSX)",
