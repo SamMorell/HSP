@@ -13,7 +13,7 @@ from hsp.core.hsp_core import (
     export_results_excel,
 )
 
-APP_VERSION = "1.0.4"
+APP_VERSION = "1.0.5"
 
 # --- Your preferred names ---
 TARGET_DIRNAME = "target_materials"
