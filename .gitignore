@@ -5,13 +5,11 @@
 __pycache__/
 *.pyc
 
-# Data inputs (local only)
-data/raw/
-
 # Data
+data/candidate_materials
 data/downloads
 data/raw
-data/candidate_materials
+
 
 # Local documentation
 docs/
