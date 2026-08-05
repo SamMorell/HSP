@@ -8,8 +8,6 @@ __pycache__/
 # Data
 data/candidate_materials
 data/downloads
-data/raw
-
 
 # Local documentation
 docs/
